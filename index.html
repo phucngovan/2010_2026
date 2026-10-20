@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#14061c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <title>Gửi Vợ Yêu 💖 20.10</title>
+  <meta name="description" content="Món quà nhỏ anh gửi em nhân ngày Phụ nữ Việt Nam 20/10">
+  <meta property="og:title" content="Gửi vợ yêu của anh 💌">
+  <meta property="og:description" content="Chúc mừng ngày Phụ nữ Việt Nam 20/10 — mở ra xem nhé!">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div id="petals" aria-hidden="true"></div>
+
+  <!-- ============ MÀN HÌNH MỞ THƯ ============ -->
+  <div id="intro">
+    <p class="intro-eyebrow">20 · 10 · 2026</p>
+    <button class="envelope" id="envelope" aria-label="Mở thư">
+      <span class="env-back"></span>
+      <span class="env-letter">
+        <span class="env-letter-heart">💖</span>
+        <span class="env-letter-text">Anh yêu em</span>
+      </span>
+      <span class="env-front"></span>
+      <span class="env-flap"></span>
+      <span class="env-seal">❤</span>
+    </button>
+    <h1 class="intro-title">Gửi <span id="wifeName">vợ yêu</span><br>của anh</h1>
+    <p class="intro-hint"><span class="tap-dot"></span>Chạm vào phong thư để mở</p>
+  </div>
+
+  <main id="app">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <canvas id="heartCanvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <p class="eyebrow">Ngày Phụ nữ Việt Nam</p>
+        <h2 class="date-big" aria-label="20 tháng 10">
+          <span class="d d1">2</span><span class="d d2">0</span>
+          <span class="date-heart">♥</span>
+          <span class="d d3">1</span><span class="d d4">0</span>
+        </h2>
+        <p class="hero-sub"><span id="typed"></span><span class="caret"></span></p>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="chev"></span><span class="chev"></span>
+        <small>vuốt lên em nhé</small>
+      </div>
+    </section>
+
+    <!-- ============ ĐẾM NGÀY ============ -->
+    <section class="sec counter">
+      <h3 class="title reveal">Mình đã bên nhau</h3>
+      <p class="sub reveal" id="startLabel"></p>
+      <div class="count-grid">
+        <div class="count-item reveal"><b id="cDays">0</b><span>ngày</span></div>
+        <div class="count-item reveal"><b id="cHours">0</b><span>giờ</span></div>
+        <div class="count-item reveal"><b id="cMins">0</b><span>phút</span></div>
+        <div class="count-item reveal"><b id="cSecs">0</b><span>giây</span></div>
+      </div>
+      <p class="note reveal">…và anh muốn đếm mãi, mãi về sau 💞</p>
+    </section>
+
+    <!-- ============ ẢNH ============ -->
+    <section class="sec gallery">
+      <h3 class="title reveal">Khoảnh khắc của mình</h3>
+      <p class="sub reveal">vuốt sang để xem nhé →</p>
+      <div class="carousel" id="carousel"></div>
+      <div class="dots" id="dots"></div>
+    </section>
+
+    <!-- ============ LỜI CHÚC ============ -->
+    <section class="sec wishes">
+      <h3 class="title reveal">Anh chúc em</h3>
+      <div class="wish-list" id="wishList"></div>
+    </section>
+
+    <!-- ============ LÁ THƯ ============ -->
+    <section class="sec letter-sec">
+      <h3 class="title reveal">Thư tay gửi em</h3>
+      <article class="letter reveal" id="letter">
+        <span class="letter-stamp">20<br>10</span>
+        <p class="letter-to">Gửi em yêu,</p>
+        <div class="letter-body" id="letterBody"></div>
+        <p class="letter-sign"><span id="signature">Chồng của em</span> ❤</p>
+      </article>
+    </section>
+
+    <!-- ============ BÓ HOA ============ -->
+    <section class="sec flowers-sec">
+      <h3 class="title reveal">Tặng em bó hoa<br>không bao giờ héo</h3>
+      <div class="bouquet" id="bouquet"></div>
+    </section>
+
+    <!-- ============ KẾT ============ -->
+    <section class="sec final" id="final">
+      <h2 class="love-text reveal">Anh yêu em</h2>
+      <p class="sub reveal">nhiều hơn mọi lời anh có thể nói</p>
+      <button class="love-btn reveal" id="loveBtn">
+        <span class="love-btn-heart">💖</span> Bấm vào đây nè
+      </button>
+      <p class="love-count" id="loveCount"></p>
+      <footer class="footer">Made with ❤ for you · 20.10.2026</footer>
+    </section>
+  </main>
+
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <button id="musicBtn" class="music-btn" aria-label="Bật/tắt nhạc" hidden>
+    <span class="bars"><i></i><i></i><i></i><i></i></span>
+  </button>
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+    <figure><img alt=""><figcaption></figcaption></figure>
+  </div>
+  <div id="toast" class="toast"></div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

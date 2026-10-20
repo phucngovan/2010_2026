@@ -343,6 +343,53 @@
     }
     update();
     setInterval(update, 1000);
+
+    // Kỷ niệm sắp tới
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let next = new Date(today.getFullYear(), m - 1, d);
+    if (next < today) next = new Date(today.getFullYear() + 1, m - 1, d);
+    const years = next.getFullYear() - y;
+    const left = Math.round((next - today) / 86400000);
+    if (years > 0) {
+      $("#anniv").textContent = left === 0 ? `Hôm nay tròn ${years} năm mình bên nhau 🎉`
+        : left === 1 ? `Ngày mai là tròn ${years} năm mình bên nhau rồi đó 💞`
+        : `Còn ${left} ngày nữa là tròn ${years} năm mình bên nhau 💞`;
+    }
+  })();
+
+  /* ---------------------------------------------------------
+     Xem ảnh to
+     --------------------------------------------------------- */
+  const openLightbox = (() => {
+    const lb = $("#lightbox");
+    lb.addEventListener("click", () => lb.classList.remove("show"));
+    return (ph) => {
+      $("img", lb).src = ph.src;
+      $("figcaption", lb).textContent = ph.caption || "";
+      lb.classList.add("show");
+    };
+  })();
+
+  /* ---------------------------------------------------------
+     Hành trình của mình
+     --------------------------------------------------------- */
+  (() => {
+    const box = $("#timeline");
+    (C.timeline || []).forEach((ch, i) => {
+      const li = document.createElement("li");
+      li.className = "tl-item reveal";
+      const photos = (ch.photos || []).map((p) => (typeof p === "string" ? { src: p } : p));
+      li.innerHTML = `<span class="tl-dot">${ch.icon || "💗"}</span>
+        <p class="tl-tag">${ch.tag || ""}</p>
+        <h4>${ch.title || ""}</h4>
+        <p class="tl-text">${ch.text || ""}</p>
+        ${photos.length ? `<div class="tl-photos">${photos.map((p, k) =>
+          `<figure class="tl-ph${p.wide ? " wide" : ""}" style="--rz:${(i + k) % 2 ? 1.2 : -1.2}deg"><div class="photo"><img src="${p.src}" alt="${ch.title || ""}" loading="lazy" decoding="async"${p.pos ? ` style="object-position:${p.pos}"` : ""}></div></figure>`
+        ).join("")}</div>` : ""}`;
+      $$(".tl-ph", li).forEach((fig, k) => fig.addEventListener("click", () => openLightbox({ src: photos[k].src, caption: ch.title })));
+      box.appendChild(li);
+    });
   })();
 
   /* ---------------------------------------------------------
@@ -358,7 +405,7 @@
       slide.className = "slide";
       const g = grads[i % grads.length];
       const photo = ph.src
-        ? `<div class="photo"><img src="${ph.src}" alt="${ph.caption || ""}" loading="lazy" decoding="async"></div>`
+        ? `<div class="photo"><img src="${ph.src}" alt="${ph.caption || ""}" loading="lazy" decoding="async"${ph.pos ? ` style="object-position:${ph.pos}"` : ""}></div>`
         : `<div class="photo placeholder" style="--c1:${g[0]};--c2:${g[1]}"><span>${emojis[i % emojis.length]}</span></div>`;
       slide.innerHTML = `<figure class="polaroid" style="--rz:${i % 2 ? 2 : -2}deg">${photo}<figcaption>${ph.caption || ""}</figcaption></figure>`;
       if (ph.src) slide.addEventListener("click", () => openLightbox(ph));
@@ -386,14 +433,6 @@
     car.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
     window.addEventListener("resize", update);
     update();
-
-    const lb = $("#lightbox");
-    function openLightbox(ph) {
-      $("img", lb).src = ph.src;
-      $("figcaption", lb).textContent = ph.caption || "";
-      lb.classList.add("show");
-    }
-    lb.addEventListener("click", () => lb.classList.remove("show"));
   })();
 
   /* ---------------------------------------------------------

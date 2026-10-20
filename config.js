@@ -10,7 +10,7 @@ window.CONFIG = {
   signature: "Chồng của em",
 
   // Ngày bắt đầu bên nhau (yêu nhau hoặc ngày cưới) — định dạng NĂM-THÁNG-NGÀY
-  startDate: "2022-10-21",
+  startDate: "2022-07-21",
   // Nhãn hiển thị cho mốc ngày ở trên
   startLabel: "kể từ ngày đầu tiên",
 
@@ -22,7 +22,7 @@ window.CONFIG = {
   // pos: "50% 30%" để chỉnh phần ảnh được giữ lại khi bị cắt khung.
   timeline: [
     {
-      icon: "💌", tag: "21 · 10 · 2022", title: "Ngày đầu tiên",
+      icon: "💌", tag: "21 · 7 · 2022", title: "Ngày đầu tiên",
       text: "Ngày mình chính thức nắm tay nhau. Từ hôm ấy, mỗi ngày của anh đều có em.",
       photos: [{ src: "assets/photos/3.jpg", pos: "50% 35%" }]
     },

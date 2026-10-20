@@ -349,13 +349,16 @@
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     let next = new Date(today.getFullYear(), m - 1, d);
     if (next < today) next = new Date(today.getFullYear() + 1, m - 1, d);
+    const last = new Date(next.getFullYear() - 1, m - 1, d);
     const years = next.getFullYear() - y;
     const left = Math.round((next - today) / 86400000);
-    if (years > 0) {
-      $("#anniv").textContent = left === 0 ? `Hôm nay tròn ${years} năm mình bên nhau 🎉`
-        : left === 1 ? `Ngày mai là tròn ${years} năm mình bên nhau rồi đó 💞`
-        : `Còn ${left} ngày nữa là tròn ${years} năm mình bên nhau 💞`;
-    }
+    const since = Math.round((today - last) / 86400000);
+    const dm = `${String(d).padStart(2, "0")}/${String(m).padStart(2, "0")}`;
+    $("#anniv").textContent = years <= 0 ? ""
+      : left === 0 ? `Hôm nay tròn ${years} năm mình bên nhau 🎉`
+      : years > 1 && since <= 30 ? `Mình vừa tròn ${years - 1} năm bên nhau hôm ${dm} 🎉`
+      : left === 1 ? `Ngày mai là tròn ${years} năm mình bên nhau rồi đó 💞`
+      : `Còn ${left} ngày nữa là tròn ${years} năm mình bên nhau 💞`;
   })();
 
   /* ---------------------------------------------------------
